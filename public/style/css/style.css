@@ -1835,28 +1835,6 @@ p.grid1 {
 .login-icons ul li a{
 	display:block;
 }
-.login-icons i.fa.fa-facebook, .login-icons i.fa.fa-twitter, .login-icons i.fa.fa-google-plus {
-    font-size: 1em;
-    color: #FFFFFF;
-    width: 33px;
-    height: 33px;
-    line-height: 34px;
-    vertical-align: middle;
-    background: #3b5998;
-    transition: 0.5s all;
-}
-.login-icons i.fa.fa-facebook:hover, .login-icons i.fa.fa-twitter:hover, .login-icons i.fa.fa-google-plus:hover {
-	 border-radius: 35px;
-}
-.login-icons i.fa.fa-twitter{
-	background:#55acee;
-}
-.login-icons i.fa.fa-google-plus{
-	background:#dc4e41;
-}
-.login-icons i.fa.fa-dribbble{
-	background:#ea4c89;
-}
 .forgot-grid{
 	float:left;
 }

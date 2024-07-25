@@ -156,16 +156,22 @@ class CpuController extends Controller
         $dataj = json_encode($datad);
         $datas = json_decode($dataj, true);
     
-        // Get related queries
-        $queries = Query::where('name', $data->name)->take(10)->get();
-    
+        // Get related queries order by count and today and limit 10 and group by name query
+        $queries = Query::select('query', DB::raw('SUM(count) as count'), DB::raw('MAX(last_query) as last_query'))
+                    ->where('name', $hospital_name)
+                    ->whereDate('created_at', date('Y-m-d'))
+                    ->groupBy('query')
+                    ->orderBy('count', 'desc')
+                    ->take(10)
+                    ->get();
+
         // Add a custom ID to the queries
         foreach ($queries as $key => $value) {
             $queries[$key]['no'] = $key + 1;
         }
     
-        // Get backup information
-        $backup = BackupInfo::where('name', $data->name)->take(10)->get();  
+        // Get backup information order by latest last_db_backup_date and limit 10
+        $backup = BackupInfo::where('name', $data->name)->orderBy('last_db_backup_date', 'desc')->take(10)->get();
     
         // Add a custom ID to the backups
         foreach ($backup as $key => $value) {

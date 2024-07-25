@@ -35,7 +35,7 @@ class QueryApiController extends Controller
             // Create a new QueryLog instance
             $queryLog = new Query();
             $queryLog->name = $data['name'];
-            $queryLog->server = $record['Server'];
+            $queryLog->server = $data['server'];
             $queryLog->query = $record['Query'];
             $queryLog->count = $record['Count'];
             $queryLog->last_query = $record['Time'];

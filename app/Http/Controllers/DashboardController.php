@@ -24,7 +24,7 @@ class DashboardController extends Controller
                         r.id AS id,
                         r.nama_rs AS name,
                         r.nama_server AS server,
-                        IFNULL(MAX(b.last_db_backup_date),'2024-01-01 01:01:02') AS last_db_backup_date,
+                        ISNULL(CONVERT(varchar, created_at, 113), 'not available') AS last_db_backup_date,
                         c.cpu_utilization,
                         c.cpu_sql_util,
                         ROUND((c.memory_in_use_mb/ c.total_memory_mb)*100,2) as memory_utilization,

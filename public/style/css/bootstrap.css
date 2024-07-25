@@ -4782,7 +4782,7 @@ a.label:focus {
   background-color: #286090;
 }
 .label-success {
-  background-color: #5cb85c;
+  background-color: #007000;
 }
 .label-success[href]:hover,
 .label-success[href]:focus {
@@ -4796,14 +4796,14 @@ a.label:focus {
   background-color: #31b0d5;
 }
 .label-warning {
-  background-color: #f0ad4e;
+  background-color: #d6a100;
 }
 .label-warning[href]:hover,
 .label-warning[href]:focus {
   background-color: #ec971f;
 }
 .label-danger {
-  background-color: #d9534f;
+  background-color: #e41717;
 }
 .label-danger[href]:hover,
 .label-danger[href]:focus {

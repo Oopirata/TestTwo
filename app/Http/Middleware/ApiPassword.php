@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Password
+class ApiPassword
 {
     /**
      * Handle an incoming request.
@@ -15,6 +15,9 @@ class Password
      */
     public function handle($request, Closure $next)
     {
+        if ($request->header('api-password') !== 'admin123') {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
         return $next($request);
     }
 }

@@ -23,8 +23,8 @@ Route::get('/backup-info',[BackupApiController::class,'index']);
 Route::get('/cpu',[CpuApiController::class,'index']);
 
 
-Route::post('/cpu',[CpuApiController::class,'store']);
-Route::post('/backup-info',[BackupApiController::class,'store']);
-Route::post('/queries',[QueryApiController::class,'store']);
+Route::post('/cpu',[CpuApiController::class,'store'])->middleware('apipassword');
+Route::post('/backup-info',[BackupApiController::class,'store'])->middleware('apipassword');
+Route::post('/queries',[QueryApiController::class,'store'])->middleware('apipassword');
 
 // Route::get('/server-status', [CpuController::class, 'serverSide']);

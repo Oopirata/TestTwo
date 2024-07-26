@@ -1,8 +1,3 @@
-<!--Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -118,49 +113,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     @yield('page')
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    {{-- <script>
-      let paused = true;
-    let speed = 2; // 1 - Fast | 2 - Medium | 3 - Slow
-    let scrollSpeed = speed; // Adjust scroll speed based on your needs
-
-    let scrollDirection = 1; // 1 for down, -1 for up
-
-    function autoScroll() {
-        if (!paused) {
-            // Scroll the page
-            window.scrollBy(0, scrollSpeed * scrollDirection);
-
-            // Check if we've reached the bottom or top
-            if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-                scrollDirection = -1; // Change direction to up
-            } else if (window.scrollY <= 0) {
-                scrollDirection = 1; // Change direction to down
-            }
-
-            // Request next frame
-            requestAnimationFrame(autoScroll);
-        }
-    }
-
-    function startScroll() {
-        paused = false;
-        requestAnimationFrame(autoScroll);
-    }
-
-    function stopScroll() {
-        paused = true;
-    }
-
-    // Handle auto-scroll toggle
-    document.body.addEventListener('keypress', function (event) {
-        if (event.which == 13 || event.keyCode == 13) { // Enter key
-            if (paused) {
-                startScroll();
-            } else {
-                stopScroll();
-            }
-        }
-    }, true);
-  </script> --}}
 </body>
 </html>

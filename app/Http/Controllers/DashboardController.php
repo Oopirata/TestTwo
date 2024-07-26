@@ -14,22 +14,36 @@ class DashboardController extends Controller
         $mainquery = "WITH LatestCPU AS (
                         SELECT
                             name,
-                            MAX(created_at) AS latest_created_at
+                            cpu_utilization,
+                            cpu_sql_util,
+                            memory_in_use_mb,
+                            total_memory_mb,
+                            sql_memory_mb,
+                            disk_size,
+                            data_size,
+                            used_data_size,
+                            ROW_NUMBER() OVER (PARTITION BY name ORDER BY created_at DESC) AS rn
                         FROM
                             cpu
-                        GROUP BY
-                            name
+                    ),
+                    LatestBackupInfo AS (
+                        SELECT
+                            name,
+                            last_db_backup_date,
+                            ROW_NUMBER() OVER (PARTITION BY name ORDER BY created_at DESC) AS rn
+                        FROM
+                            backup_info
                     )
+
                     SELECT 
                         r.id AS id,
                         r.nama_rs AS name,
                         r.nama_server AS server,
-                        -- IFNULL(MAX(b.last_db_backup_date),'1010-10-10 10:10:10') AS last_db_backup_date,
-                        ISNULL(CONVERT(varchar, created_at, 113), 'not available') AS last_db_backup_date,
+                        ISNULL(CONVERT(varchar, b.last_db_backup_date, 113), 'not available') AS last_db_backup_date,
                         c.cpu_utilization,
                         c.cpu_sql_util,
-                        ROUND((c.memory_in_use_mb/ c.total_memory_mb)*100,2) as memory_utilization,
-                        ROUND((c.data_size/ c.disk_size)*100,2) as disk_utilization,
+                        ROUND(((c.memory_in_use_mb + 0.0) / (c.total_memory_mb + 0.0) * 100), 2) AS memory_utilization,
+                        ROUND(((c.data_size + 0.0) / (c.disk_size + 0.0) * 100), 2) AS disk_utilization,
                         c.total_memory_mb,
                         c.memory_in_use_mb,
                         c.sql_memory_mb,
@@ -39,24 +53,13 @@ class DashboardController extends Controller
                     FROM 
                         rsname r
                     LEFT JOIN 
-                        backup_info b 
+                        LatestBackupInfo b 
                     ON 
-                        r.nama_rs = b.name
+                        r.nama_rs = b.name AND b.rn = 1
                     LEFT JOIN 
-                        cpu c 
+                        LatestCPU c 
                     ON 
-                        r.nama_rs = c.name
-                    AND 
-                        c.created_at = (
-                            SELECT 
-                                l.latest_created_at
-                            FROM 
-                                LatestCPU l
-                            WHERE 
-                                l.name = r.nama_rs
-                        )
-                    GROUP BY 
-                        r.nama_rs, c.cpu_utilization, c.cpu_sql_util, c.total_memory_mb, c.memory_in_use_mb, c.sql_memory_mb, c.disk_size, c.data_size, c.used_data_size;";
+                        r.nama_rs = c.name AND c.rn = 1";
     
         $data = DB::select($mainquery);
     

@@ -159,7 +159,6 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Hospital</th>
-                                        <th data-orderable="false">Server</th>
                                         <th>CPU</th>
                                         <th>Memory Usage</th>
                                         <th>Disk Usage</th>
@@ -172,7 +171,6 @@
                                     <tr data-href="/server-detail/{{ $data->id }}">
                                         <td>{{ $data->id }}</td>
                                         <td>{{ $data->name }}</td>
-                                        <td>{{ $data->server }}</td>
                                         <td>{{ $data->cpu_utilization }}%</td>
                                         <td>{{ $data->memory_utilization }}%</td>
                                         <td>{{ $data->disk_utilization }}%</td>
@@ -235,6 +233,10 @@
                                                     var statusLabel = 'normal';
                                                     var statusClass = 'label-success';
                                                     var maxUtilization = Math.max(item.cpu_utilization, item.memory_utilization, item.disk_utilization);
+                                                    //save the memory utlization to float with precision of 2
+                                                    item.memory_utilization = parseFloat(item.memory_utilization).toFixed(2);
+                                                    //and disk utilization
+                                                    item.disk_utilization = parseFloat(item.disk_utilization).toFixed(2);
                                                     if (maxUtilization >= 80) {
                                                         statusLabel = 'danger';
                                                         statusClass = 'label-danger';
@@ -249,7 +251,6 @@
                                                     var newRow = $(`<tr data-href="/server-detail/${item.id}">
                                                         <td>${item.id}</td>
                                                         <td>${item.name}</td>
-                                                        <td>${item.server}</td>
                                                         <td>${item.cpu_utilization}%</td>
                                                         <td>${item.memory_utilization}%</td>
                                                         <td>${item.disk_utilization}%</td>

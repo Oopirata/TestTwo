@@ -164,7 +164,7 @@
                             </table>
 
                             <!-- Popup Dialog -->
-                            <div id="popupDialog" style="visibility:hidden; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: white; border: 1px solid black; padding: 10px 10px 0px 10px; z-index: 1000; max-height: 70vh; overflow-y: auto;">
+                            <div id="popupDialog" style="visibility:hidden; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgb(255, 255, 255); border: 1px solid black; padding: 10px 10px 0px 10px; z-index: 1000; max-height: 70vh; overflow-y: auto;">
                                 <div id="popupContent" style="overflow-y: auto;">
                                     <p id="popupQuery"></p>
                                 </div>

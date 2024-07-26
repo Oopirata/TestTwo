@@ -190,7 +190,20 @@
                             </table>
                             <script>
                                 $(document).ready(function() {
-                                    var tabelHospital = $('#servercpu').DataTable({   
+                                    function sliceText() {
+                                        // Adjust the selector to target only the "Hospital" column cells
+                                        $('#servercpu tbody tr td:nth-child(2)').each(function() {
+                                            var fullText = $(this).text();
+                                            var maxLength = 30; // Adjust the length as needed
+                                            if (fullText.length > maxLength) {
+                                                var slicedText = fullText.slice(0, maxLength) + '...';
+                                                $(this).text(slicedText);
+                                            }
+                                        });
+                                    }
+
+                                    var tabelHospital = $('#servercpu').DataTable({
+                                        autoWidth: false,
                                         paging: false,  
                                         initComplete: function(settings, json) {
                                             $('.dt-paging-button').on("focus", function() {
@@ -203,6 +216,9 @@
                                                 $(this).blur();
                                             });
                                             $('.dt-paging-button').attr("tabindex", "-1");
+
+                                            // Call the sliceText function after drawing the table
+                                            sliceText();
                                         }
                                     });
 
@@ -233,9 +249,9 @@
                                                     var statusLabel = 'normal';
                                                     var statusClass = 'label-success';
                                                     var maxUtilization = Math.max(item.cpu_utilization, item.memory_utilization, item.disk_utilization);
-                                                    //save the memory utlization to float with precision of 2
+                                                    // Save the memory utilization to float with precision of 2
                                                     item.memory_utilization = parseFloat(item.memory_utilization).toFixed(2);
-                                                    //and disk utilization
+                                                    // And disk utilization
                                                     item.disk_utilization = parseFloat(item.disk_utilization).toFixed(2);
                                                     if (maxUtilization >= 80) {
                                                         statusLabel = 'danger';
@@ -259,6 +275,7 @@
                                                     </tr>`);
                                                     tabelHospital.row.add(newRow).draw(false);
                                                 });
+                                                tabelHospital.columns.adjust().draw();
                                                 window.scrollTo(0, currentScrollPosition);
                                                 updateSummary(normalCount, warningCount, dangerCount);
                                             },

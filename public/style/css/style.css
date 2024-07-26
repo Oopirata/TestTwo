@@ -1317,6 +1317,14 @@ li.active a i, .act a i {
     text-transform: uppercase;
    font-family: 'Carrois Gothic', sans-serif;
 }
+/*datatable*/
+#servercpu {
+    width: 100%;
+    table-layout: auto;  /* Allow content to dictate column width */
+}
+#servercpu th, #servercpu td {
+    white-space: nowrap;  /* Prevent text wrapping */
+}
 #backupinfo_wrapper.dt-container {
     width: 1600px;
     margin: 0 auto;

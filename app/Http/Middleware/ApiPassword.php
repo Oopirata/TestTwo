@@ -15,7 +15,7 @@ class ApiPassword
      */
     public function handle($request, Closure $next)
     {
-        if ($request->header('api-password') !== 'admin123') {
+        if ($request->header('api-password') !== config('app.api_password')) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
         return $next($request);

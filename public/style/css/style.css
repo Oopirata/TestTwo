@@ -475,12 +475,8 @@ span.logo-clr{
 ::-webkit-input-placeholder{
    color:#7A7B78 !important;
 }
-/*--//search-ends --*/
+/*-- search-ends --*/
 /*--- Progress Bar ----*/
-.animate > span:after {
-	display: none;
-}
-
 @-webkit-keyframes move {
     0% {
        background-position: 0 0;
@@ -509,26 +505,6 @@ span.logo-clr{
 	background-image: none;
 }
 /*--- User Panel---*/
-.dropdown-menu {
-    box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
-	-webkit-box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
-	-moz-box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
-    border-radius: 0;
-}
-li.dropdown.head-dpdn {
-    display: inline-block;
-    padding: 1em 0;    
-	float: left;
-}
-li.dropdown.head-dpdn a.dropdown-toggle {
-   margin: 1em 2em;
-}
-ul.dropdown-menu li {
-    margin-left: 0;
-    width: 100%;
-    padding: 0;
-	background: #fff;
-}
 .sidebar .nav-second-level li a.active ,.sidebar ul li a.active{
     color: #F2B33F;
 }
@@ -538,10 +514,6 @@ li.active a i, .act a i {
 .custom-nav > li.act > a, .custom-nav > li.act > a:hover, .custom-nav > li.act > a:focus {
     background-color: #353f4f;
     color:#8BC34A;
-}
-
-.header-right i.fa.fa-envelope{
-	color:#6F6F6F;
 }
 /*---bages---*/
 .header-right span.badge {
@@ -577,90 +549,6 @@ li.active a i, .act a i {
   float:right;
 }
 /*---//bages---*/
-/*--Progress bars--*/
-.progress {
-    height: 10px;
-    margin: 7px 0;
-    overflow: hidden;
-    background: #e1e1e1;
-    z-index: 1;
-    cursor: pointer;
-}
-.task-info .percentage{
-	float:right;
-	height:inherit;
-	line-height:inherit;
-}
-.task-desc{
-	font-size:12px;
-}
-.wrapper-dropdown-3 .dropdown li a:hover span.task-desc {
-	color:#65cea7;
-}
-.progress .bar {
-		z-index: 2;
-		height:15px; 
-		font-size: 12px;
-		color: white;
-		text-align: center;
-		float:left;
-		-webkit-box-sizing: content-box;
-		-moz-box-sizing: content-box;
-		-ms-box-sizing: content-box;
-		box-sizing: content-box;
-		-webkit-transition: width 0.6s ease;
-		  -moz-transition: width 0.6s ease;
-		  -o-transition: width 0.6s ease;
-		  transition: width 0.6s ease;
-	}
-.progress.active .bar {
-  -webkit-animation: progress-bar-stripes 2s linear infinite;
-  -moz-animation: progress-bar-stripes 2s linear infinite;
-  -ms-animation: progress-bar-stripes 2s linear infinite;
-  -o-animation: progress-bar-stripes 2s linear infinite;
-  animation: progress-bar-stripes 2s linear infinite;
-}
-@-webkit-keyframes progress-bar-stripes {
-  from {
-    background-position: 40px 0;
-  }
-  to {
-    background-position: 0 0;
-  }
-}
-@-moz-keyframes progress-bar-stripes {
-  from {
-    background-position: 40px 0;
-  }
-  to {
-    background-position: 0 0;
-  }
-}
-@-ms-keyframes progress-bar-stripes {
-  from {
-    background-position: 40px 0;
-  }
-  to {
-    background-position: 0 0;
-  }
-}
-@-o-keyframes progress-bar-stripes {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 40px 0;
-  }
-}
-@keyframes progress-bar-stripes {
-  from {
-    background-position: 40px 0;
-  }
-  to {
-    background-position: 0 0;
-  }
-}
-/*--Progress bars--*/
 /*--header strip end here-*/
 /*inner-block--*/
 /*  toastr */
@@ -1300,12 +1188,6 @@ li.active a i, .act a i {
     padding: 0px;
 }
 /*--chit chart layer start here--*/
-.panel {
-    padding: 1em 1em;
-    margin-bottom:0px;
-    background: none;
-    box-shadow: none;
-}
 .chit-chat-layer1 {
     background-color: #ebebeb;
     margin:1em  0em;
@@ -1320,10 +1202,10 @@ li.active a i, .act a i {
 /*datatable*/
 #servercpu {
     width: 100%;
-    table-layout: auto;  /* Allow content to dictate column width */
+    table-layout: auto;
 }
 #servercpu th, #servercpu td {
-    white-space: nowrap;  /* Prevent text wrapping */
+    white-space: nowrap;
 }
 #backupinfo_wrapper.dt-container {
     width: 1600px;
@@ -1356,43 +1238,6 @@ li.active a i, .act a i {
 {
 
 background-color:#000;
-}
-/*--button start here--*/
-.btn-effcts.panel-widget {
-    padding: 1em;
-    margin-top: 2em;
-    background: #fff;
-    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15);
-}
-.btn-main-heading h2 {
-    font-size: 2em;
-    color: #68AE00;
-    margin-bottom: 1em;
-    font-family: 'Carrois Gothic', sans-serif;
-}
-.button-heading h4 {
-    font-size: 1.8em;
-    color:#337AB7;
-    margin-bottom: 0.5em;
-    font-family: 'Carrois Gothic', sans-serif;
-}
-/*--button end here--*/
-/*--typography--*/
-p.grid1 {
-    margin-bottom: 1em;
-}
-.grid_3.grid_4 {
-    background: #fff;
-    padding: 1em 2em;
-    box-shadow: 0px 0px 2px 1px rgba(0,0,0,0.15);
-}
-.col-lg-6.mb-60 .nav-tabs > li > a {
-    background:#ECEAEA;
-    color: #565555;
-}
-.col-lg-6.mb-60 h4 {
-    font-size: 2em;
-    margin-bottom: 0.5em;
 }
 /*--error page start here--*/
 .error-404 {
@@ -2057,25 +1902,11 @@ span.malorum-pro {
 .market-update-gd {
     padding: 0px;
 }
-.chart-layer1-left {
-    padding: 0em 0.5em 0em 0em;
-}
-.chart-layer1-right {
-    padding: 0em 0em 0em 0.5em;
-}
-.chart-layer2-right {
-    padding: 0em 0.5em 0em 0em;
-}
-.chart-layer2-left {
-    padding: 0em 0em 0em 0.5em;
-}
 canvas#radar {
     width: 350px !important;
     height: 350px !important;
 }
-.climate-grids {
-    padding: 0em 0.5em 0em 0em;
-}
+
 .shoppy h3 {
     font-size: 1.1em;
 }
@@ -2116,12 +1947,6 @@ canvas#radar {
 .panel-body {
     padding: 20px;
     font-size: 0.9em;
-}
-.login-main {
-    width: 50%;
-}
-.signup-main {
-    width: 50%;
 }
 canvas#doughnut {
     width: 300px !important;
@@ -2214,9 +2039,6 @@ canvas#pie {
 }
 .profile_details_left ul {
     padding: 0px;
-}
-div#geoChart {
-    height: 292px!important;
 }
 .project-eff:hover span.rollover1 {
     width: 180px;
@@ -2361,26 +2183,6 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 .chit-chat-layer1-left {
     padding: 0em 0em 2em 0em;
 }
-.chart-layer1-left {
-    padding: 0em 0em 0em 0em;
-    float: left;
-    width: 49%;
-}
-.chart-layer1-right {
-    padding: 0px;
-    float: right;
-    width: 49%;
-}
-.chart-layer2-right {
-    padding: 0px;
-    float: left;
-    width: 49%;
-}
-.chart-layer2-left {
-    padding: 0px;
-    float: right;
-    width: 49%;
-}
 .climate-grids {
     padding: 0px;
 }
@@ -2480,28 +2282,11 @@ canvas#radar {
 .map-1 {
     margin-bottom: 2em;
 }
-.login-main {
-    width: 70%;
-}
-.signup-main {
-    width: 70%;
-}
 .dygno {
-    padding: 1em 1em;
-}
-.line-chart {
     padding: 1em 1em;
 }
 .polararea {
     padding: 1em 1em;
-}
-.chart-other {
-    padding: 1em 1em;
-}
-.chart-blo-1 {
-    float: left;
-    width: 50%;
-    padding: 0px 12px 15px 0px;
 }
 canvas#doughnut {
     width: 275px !important;
@@ -2698,29 +2483,11 @@ canvas#pie {
 .inner-block {
     padding: 10em 2em 2em 2em;
 }
-.chart-layer1-left {
-    padding: 0em 0em 2em 0em;
-    float: none;
-    width: 100%;
-}
 canvas#bar {
     width: 500px !important;
 }
-.chart-layer1-right {
-    float: none;
-    width: 100%;
-}
 span.malorum-pro {
     left: 220px;
-}
-.chart-layer2-right {
-    padding: 0em 0em 2em 0em;
-    float: none;
-    width: 100%;
-}
-.chart-layer2-left {
-    float: none;
-    width: 100%;
 }
 .revenue {
     text-align: center;
@@ -2741,23 +2508,6 @@ span.malorum-pro {
     padding: 6px 12px;
     font-size: 13px;
 }
-.login-main {
-    width: 80%;
-}
-.signup-main {
-    width: 80%;
-}
-.signup-block {
-    padding: 3em 2em;
-}
-.login-block {
-    padding: 3em 2em;
-}
-.chart-blo-1 {
-    float: none;
-    width: 100%;
-    padding: 0px 0px 15px 0px;
-}
 canvas#line {
     width: 500px !important;
 }
@@ -2765,12 +2515,6 @@ canvas#line {
     text-align: center;
 }
 .dygno h2 {
-    text-align: left;
-}
-.chart-other {
-    text-align: center;
-}
-.chart-other h3 {
     text-align: left;
 }
 .project-eff:hover span.rollover1 {
@@ -2792,21 +2536,6 @@ canvas#line {
     width: 475px !important;
 }
 .grid_3.grid_4 {
-    padding: 1em 1em;
-}
-.typo-buttons {
-    padding: 1em 1em;
-}
-.typo-alerts {
-    padding: 1em 1em;
-}
-.typo-progresses {
-    padding: 1em 1em;
-}
-.typo-wells {
-    padding: 1em 1em;
-}
-.typo-badges {
     padding: 1em 1em;
 }
 .boost-icons-list ul li {
@@ -2882,20 +2611,11 @@ canvas#bar {
 .chit-chat-layer1-left {
     padding: 0em 0em 1em 0em;
 }
-.chart-layer1-left {
-    padding: 0em 0em 1em 0em;
-}
 canvas#bar {
     width: 350px !important;
 }
 span.malorum-pro {
     left: 150px;
-}
-.chart-layer-2 {
-    margin: 1em 0em;
-}
-.chart-layer2-right {
-    padding: 0em 0em 1em 0em;
 }
 .climate-grid2 {
     margin: 1em 0em 0em 0em;
@@ -2931,27 +2651,12 @@ h2#h2-bootstrap-heading {
 h3#h3-bootstrap-heading {
     font-size: 1.3em;
 }
-.typo-buttons {
-    margin: 1em 0em;
-}
 .page-header h3 {
     font-size: 1.5em;
-}
-.typo-progresses {
-    margin: 1em 0em;
 }
 .page-header {
     padding-bottom: 8px;
     margin: 10px 0 10px;
-}
-.typo-wells h3 {
-    font-size: 1.5em;
-}
-.typo-badges h3 {
-    font-size: 1.5em;
-}
-.typo-wells {
-    margin-bottom: 1em;
 }
 .map-main-page h2 {
     margin-bottom: 0.5em;
@@ -2961,32 +2666,6 @@ h3#h3-bootstrap-heading {
 }
 .map-system {
     margin-bottom: 1em;
-}
-.login-main {
-    width: 90%;
-}
-.login-block {
-    padding: 1.5em 1.5em;
-}
-.login-block input[type="text"], .login-block input[type="password"] {
-    margin: 0em 0em 1em 0em;
-}
-.forgot-top-grids {
-    margin: 0em 0em 0.8em 0em;
-}
-.signup-main {
-    width: 90%;
-}
-.signup-block {
-    padding: 2em 1.5em;
-}
-.signup-head h1 {
-    font-size: 2.5em;
-    padding: 1.3em 0em 0em 0em;
-}
-.login-head h1 {
-    font-size: 2.5em;
-    padding: 1.3em 0em 0em 0em;
 }
 canvas#line {
     width: 350px !important;
@@ -3118,19 +2797,6 @@ canvas#pie {
 .boost-icons-list ul li {
     font-size: 0.6em;
 }
-.forgot a {
-    font-size: 0.65em;
-}
-.forgot-grid ul li input[type="checkbox"]+label {
-    font-size: .65em;
-    padding-left: 21px;
-}
-.forgot-grid ul li input[type="checkbox"]+label span:first-child {
-    bottom: -1px;
-}
-.forgot-top-grids {
-    padding: 0em 0.5em;
-}
 }
 @media (max-width:375px){
 .page-container {
@@ -3162,12 +2828,6 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 .search-box input[type="text"] {
     width: 76%;
 }
-.profile_details_left {
-    width: 40%;
-}
-.profile_details {
-    width: 60%;
-}
 .fixed {
     width: 84%;
 }
@@ -3178,20 +2838,8 @@ li.dropdown.head-dpdn a.dropdown-toggle {
 .user-name {
     margin-left: 2px;
 }
-.profile_details li a i.fa.lnr {
-    right: 1%;
-}
 .chit-chat-heading {
     font-size: 1em;
-}
-h3#geoChartTitle {
-    font-size: 1.05em;
-}
-div#geoChart {
-    height: 135px!important;
-}
-.glocy-chart {
-    padding: 1em 1em;
 }
 canvas#bar {
     width: 195px !important;
@@ -3207,15 +2855,6 @@ span.malorum-pro {
     left:83px;
     background-size: 100%;
 }
-.malorm-bottom {
-    padding: 1.5em 0.8em;
-}
-.malorm-bottom h2 {
-    font-size: 1em;
-}
-.malorm-bottom ul {
-    margin-top: 0.5em;
-}
 h3.tlt {
     font-size: 1em;
 }
@@ -3228,9 +2867,6 @@ h3.tlt {
 .home-progres-main {
     padding-bottom: 0px;
 }
-.chart-layer2-left h3 {
-    font-size: 1em;
-}
 .search-box input[type="text"] {
     width: 80%;
     font-size: 0.95em;
@@ -3240,27 +2876,11 @@ canvas#radar {
     width: 195px !important;
     height: 200px !important;
 }
-.climate-gd1top-left h4 {
-    font-size: 1em;
-}
 .cloudy1 h4 {
     font-size: 0.8em;
 }
 .cloudy1 h3 {
     font-size: 1em;
-}
-.climate-gd1top-left p {
-    font-size: 0.8em;
-}
-.climate-gd1top-right p {
-    font-size: 0.8em;
-    line-height: 1.8em;
-}
-.climate-grid1 {
-    min-height: 317px;
-}
-.climate-grid2 {
-    min-height: 170px;
 }
 span.shoppy-rate {
     margin: 0.5em 0.5em;
@@ -3272,27 +2892,6 @@ span.shoppy-rate h4 {
 }
 .shoppy h3 {
     font-size: 1em;
-}
-.popular-bran-left p {
-    font-size: 0.78em;
-    margin-top: 0.5em;
-}
-.popular-bran-left h4 {
-    font-size: 0.7em;
-}
-.popular-bran-left {
-    padding: 0.7em 1em;
-}
-.popular-bran-right h3 {
-    font-size: 1.5em;
-    width: 70px;
-    height: 70px;
-}
-.popular-follo-left {
-    padding: 0.8em 1em;
-}
-.popular-follo-left p {
-    font-size: 0.75em;
 }
 .cols-grids h2 {
     font-size: 1.7em;
@@ -3324,66 +2923,6 @@ span.shoppy-rate h4 {
 .map-main-page h2 {
     font-size: 1.7em;
 }
-.login-page {
-    padding: 1.3em 0em;
-}
-.forgot-top-grids {
-    padding: 0em 0em;
-}
-.forgot-grid ul li input[type="checkbox"]+label {   
-    padding-left: 22px;
-    font-size: .65em;
-}
-.login-block input[type="text"], .login-block input[type="password"] {
-    font-size: 0.8em;
-    padding: 7px 20px;
-}
-.login-block input[type="submit"] {
-    font-size: 0.9em;
-}
-.login-block h5 {
-    font-size: 0.9em;
-}
-.login-head h1 {
-    font-size: 2em;
-}
-.login-head {
-    min-height: 130px;
-}
-.login-block h3 {
-    font-size: 0.85em;
-}
-.login-block h2 {
-    margin: 1em 0;
-}
-.signup-page-main {
-    padding: 1.5em 0em;
-}
-.signup-head h1 {
-    font-size: 2em;
-}
-.signup-head {
-    min-height: 130px;
-}
-.signup-block {
-    padding: 1.5em 1.3em;
-}
-.signup-block input[type="text"], .signup-block input[type="password"] {
-    font-size: 0.8em;
-    padding: 6px 15px;
-}
-.signup-block input[type="submit"] {
-    font-size: 0.85em;
-}
-.sign-down {
-    margin-top: 10px;
-}
-.sign-down h4 {
-    font-size: 0.8em;
-}
-.sign-down h5 {
-    font-size: 0.83em;
-}
 canvas#doughnut {
     width: 185px !important;
     height: 180px !important;
@@ -3395,9 +2934,6 @@ canvas#line {
     width: 205px !important;
     height: 185px !important;
 }
-.line-chart h3 {
-    font-size: 1.3em;
-}
 canvas#polarArea {
     width: 190px !important;
     height: 180px !important;
@@ -3408,9 +2944,6 @@ canvas#polarArea {
 canvas#pie {
     width: 195px !important;
     height: 195px !important;
-}
-.chart-other h3 {
-    font-size: 1.3em;
 }
 .inbox h2 {
     font-size: 1.7em;
@@ -3429,10 +2962,6 @@ canvas#pie {
 .compose-right .inbox-details-body {
     padding: 1em;
 }
-/* .compose-right .alert.alert-info {
-    padding: 10px 20px;
-    font-size: 0.8em;
-} */
 .inbox-details-body textarea {
     font-size: 0.8em;
     height: 7em;
@@ -3451,10 +2980,6 @@ canvas#pie {
     width: 100%;
     padding: 0px;
 }
-.prices-head h2 {
-    font-size: 1.7em;
-    margin: 0em 0em 0.5em 0.4em;
-}
 .error-404 h2 {
     font-size: 1.5em;
 }
@@ -3464,25 +2989,6 @@ canvas#pie {
 .blank h2 {
     font-size: 1.7em;
     margin-bottom: 0.5em;
-}
-.blankpage-main {
-    padding: 1em 1em;
-    margin-top: 2em;
-}
-.blankpage-main p {
-    font-size: 0.8em;
-}
-.boost-icons-head h2 {
-    font-size: 1.7em;
-    margin-bottom: 0.5em;
-}
-.boost-icons-list ul li {
-    width: 100%;
-    margin: 0% 1% 2% 0%;
-    padding: 2em 0.5em;
-}
-.boost-icons-list ul li {
-    font-size: 0.8em;
 }
 .page-container.sidebar-collapsed-back .sidebar-menu {
     width: 55px;
@@ -3503,41 +3009,10 @@ canvas#pie {
 ul.dropdown-menu {
     min-width: 195px;
 }
-.profile_details ul li ul.dropdown-menu.drp-mnu {
-    min-width: 160px;
-}
-.popular-follo-right h4 {
-    font-size: 1em;
-}
-.popular-follo-right h5 {
-    font-size: 0.85em;
-}
-.popular-follo-right {
-    padding: 1.45em 1em;
-}
-.popular-bran-left h3 {
-    font-size: 1em;
-}
 .page-container.sidebar-collapsed .sidebar-menu {
     width: 130px;
 }
 .market-update-block h3 {
     font-size: 1.7em;
-}
-.forgot a {
-    font-size: 0.65em;
-}
-.inbox-details-body input[type="text"] {   
-    font-size: 0.8em;
-    height: 33px;
-}
-.forgot a {
-    font-size: 0.6em;
-}
-.b_label, .bar_label_min, .bar_label_max, .b_tooltip span {
-    font-size: 11px;
-}
-.b_tooltip {
-    padding: 4px 7px 7px 7px;
 }
 }

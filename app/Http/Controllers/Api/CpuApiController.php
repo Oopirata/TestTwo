@@ -241,7 +241,6 @@ class CpuApiController extends Controller
             event(new ServerAlert($pesan));
         }
 
-        // event(new ServerAlert($pesan));
 
 
         return response()->json([

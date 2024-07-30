@@ -19,8 +19,8 @@ use App\Http\Middleware\Password;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/backup-info',[BackupApiController::class,'index']);
-Route::get('/cpu',[CpuApiController::class,'index']);
+Route::get('/backup-info',[BackupApiController::class,'index'])->middleware('apipassword');
+Route::get('/cpu',[CpuApiController::class,'index'])->middleware('apipassword');
 
 
 Route::post('/cpu',[CpuApiController::class,'store'])->middleware('apipassword');

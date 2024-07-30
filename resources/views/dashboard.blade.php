@@ -237,7 +237,7 @@
                                         var currentScrollPosition = window.scrollY;
 
                                         $.ajax({
-                                            url: '/index',
+                                            url: '/prolimslog/index',
                                             method: 'GET',
                                             success: function(data) {
                                                 tabelHospital.clear();  

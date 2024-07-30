@@ -27,7 +27,7 @@
             </div>
             <div class="header-left">
                 <div class="logo-name-serverDetail">
-                    <a href="/dashboard"><h4>Dashboard</h4></a>
+                    <a href="/prolimslog/dashboard"><h4>Dashboard</h4></a>
                     <h3>{{ $data['name'] }}</h3>
                 </div>
                 <div class="clearfix"> </div>
@@ -228,7 +228,7 @@
                 
                         function fetchAndUpdateTable() {
                             $.ajax({
-                                url: `/indexServerDetail/${identifier}`,
+                                url: `prolimslog/indexServerDetail/${identifier}`,
                                 method: 'GET',
                                 success: function(data) {
                                     data = data.queries;
@@ -305,7 +305,7 @@
 
                                     function fetchAndUpdateBackup() {
                                         $.ajax({
-                                            url: `/indexServerDetail/${identifier}`,
+                                            url: `prolimslog/indexServerDetail/${identifier}`,
                                             method: 'GET',
                                             success: function(data) {
                                                 data = data.backup;

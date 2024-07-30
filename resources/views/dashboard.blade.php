@@ -27,7 +27,7 @@
             </div>
             <div class="header-left">
                 <div class="logo-name">
-                    <a href="/dashboard"> <h1>ELIMSPRO</h1> 
+                    <a href="/prolimslog/dashboard"> <h1>ELIMSPRO</h1> 
                     <!--<img id="logo" src="" alt="Logo"/>--> 
                     </a>                                
                 </div>
@@ -190,8 +190,23 @@
                             </table>
                             <script>
                                 $(document).ready(function() {
+                                    // Detect custom status type
+                                    $.fn.dataTable.ext.type.detect.unshift(function(d) {
+                                        return d === 'normal' || d === 'warning' || d === 'danger' ? 'status' : null;
+                                    });
+                
+                                    // Define custom sorting for status type
+                                    $.fn.dataTable.ext.type.order['status-pre'] = function(d) {
+                                        var v = $(d).text();
+                                        switch (v) {
+                                            case 'normal': return 1;
+                                            case 'warning': return 2;
+                                            case 'danger': return 3;
+                                        }
+                                        return 4;
+                                    };
+                
                                     function sliceText() {
-                                        // Adjust the selector to target only the "Hospital" column cells
                                         $('#servercpu tbody tr td:nth-child(2)').each(function() {
                                             var fullText = $(this).text();
                                             var maxLength = 30; // Adjust the length as needed
@@ -201,10 +216,13 @@
                                             }
                                         });
                                     }
-
+                
                                     var tabelHospital = $('#servercpu').DataTable({
                                         autoWidth: false,
-                                        paging: false,  
+                                        paging: false,
+                                        columnDefs: [
+                                            { type: 'status', targets: 6 }
+                                        ],
                                         initComplete: function(settings, json) {
                                             $('.dt-paging-button').on("focus", function() {
                                                 $(this).blur();
@@ -216,42 +234,41 @@
                                                 $(this).blur();
                                             });
                                             $('.dt-paging-button').attr("tabindex", "-1");
-
+                
                                             // Call the sliceText function after drawing the table
                                             sliceText();
                                         }
                                     });
-
+                
                                     $('#searchHospital').keyup(function() {
                                         tabelHospital.search($(this).val()).draw();
                                     });
-
+                
                                     $('#servercpu').on('click', 'tbody tr', function() {
                                         var href = $(this).data('href');
                                         if (href) {
                                             window.location.href = href;
                                         }
                                     });
-
+                
                                     function fetchAndUpdateTable() {
                                         var currentScrollPosition = window.scrollY;
-
+                
                                         $.ajax({
                                             url: '/prolimslog/index',
                                             method: 'GET',
                                             success: function(data) {
-                                                tabelHospital.clear();  
+                                                tabelHospital.clear();
                                                 var normalCount = 0;
                                                 var warningCount = 0;
                                                 var dangerCount = 0;
-
+                                                var no = 1;
+                
                                                 data.forEach(function(item) {
                                                     var statusLabel = 'normal';
                                                     var statusClass = 'label-success';
                                                     var maxUtilization = Math.max(item.cpu_utilization, item.memory_utilization, item.disk_utilization);
-                                                    // Save the memory utilization to float with precision of 2
                                                     item.memory_utilization = parseFloat(item.memory_utilization).toFixed(2);
-                                                    // And disk utilization
                                                     item.disk_utilization = parseFloat(item.disk_utilization).toFixed(2);
                                                     if (maxUtilization >= 80) {
                                                         statusLabel = 'danger';
@@ -264,8 +281,8 @@
                                                     } else {
                                                         normalCount++;
                                                     }
-                                                    var newRow = $(`<tr data-href="/server-detail/${item.id}">
-                                                        <td>${item.id}</td>
+                                                    var newRow = $(`<tr data-href="/prolimslog/server-detail/${item.id}">
+                                                        <td>${no++}</td>
                                                         <td>${item.name}</td>
                                                         <td>${item.cpu_utilization}%</td>
                                                         <td>${item.memory_utilization}%</td>
@@ -284,45 +301,43 @@
                                             }
                                         });
                                     }
-
+                
                                     function updateSummary(normal, warning, danger) {
                                         $('#normal-count').text(normal);
                                         $('#warning-count').text(warning);
                                         $('#danger-count').text(danger);
                                     }
-
+                
                                     setInterval(fetchAndUpdateTable, 5000);
                                     fetchAndUpdateTable();
-                                    
+                
                                     // Auto-scroll logic
                                     var autoScrollInterval;
                                     var scrollSpeed = 6; // Adjust scroll speed
                                     var scrollDirection = 1; // 1 for down, -1 for up
-
+                
                                     function startAutoScroll() {
                                         autoScrollInterval = setInterval(function() {
                                             var scrollPosition = window.scrollY;
-                                            var viewHeight = window.innerHeight;                                           
-                                            var scrollHeight = document.body.scrollHeight;                                            
-                                            var reachedBottom = (scrollPosition + viewHeight) >= scrollHeight+100;
+                                            var viewHeight = window.innerHeight;
+                                            var scrollHeight = document.body.scrollHeight;
+                                            var reachedBottom = (scrollPosition + viewHeight) >= scrollHeight + 100;
                                             var reachedTop = scrollPosition <= 0;
-                                            
+                
                                             if (reachedBottom) {
-                                                console.log(`scrollposition ${scrollPosition} viewHeight ${viewHeight} scrollHeight ${scrollHeight}`);
                                                 scrollDirection = -1; // Change direction to up
                                             } else if (reachedTop) {
                                                 scrollDirection = 1; // Change direction to down
                                             }
-                                            
+                
                                             window.scrollBy(0, scrollSpeed * scrollDirection);
                                         }, 30); // Adjust this value for scroll smoothness
                                     }
-
+                
                                     function stopAutoScroll() {
                                         clearInterval(autoScrollInterval);
                                     }
-
-                                    // Start auto-scroll on page load
+                
                                     document.getElementById('flexSwitchCheckDefault').addEventListener('change', function() {
                                         if (this.checked) {
                                             startAutoScroll();
@@ -334,10 +349,10 @@
                                         startAutoScroll();
                                     }
                                 });
-                            </script>                                                                                            
+                            </script>
                         </div>
                     </div>
-                </div>
+                </div>                                
                 <div class="clearfix"> </div>
             </div>
             <!--main page chit chatting end here-->

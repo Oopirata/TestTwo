@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>@yield('title') - Sora</title>
+<title>@yield('title') - Prolims</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 {{-- <meta http-equiv="refresh" content="60"> --}}
@@ -29,7 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   var channel = pusher.subscribe('notification-channel');
   channel.bind('server-alert', function(data) {
     // alert(JSON.stringify(data.message));
-    var audio = new Audio("{{ asset('style/sounds/alert4.mp3') }}");
+    var audio = new Audio("{{ asset('style/sounds/alert3.mp3') }}");
     console.log(audio);
     // audio.muted = true;
     audio.play();

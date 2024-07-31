@@ -162,7 +162,7 @@ class CpuController extends Controller
         $queries = Query::select('query', DB::raw('SUM(count) as count'), DB::raw('MAX(last_query) as last_query'))
                     ->where('name', $hospital_name)
                     ->whereDate('created_at', date('Y-m-d'))
-                    ->groupBy('query')
+                    ->groupBy('CAST(query as nvarchar(max))')
                     ->orderBy('count', 'desc')
                     ->take(10)
                     ->get();

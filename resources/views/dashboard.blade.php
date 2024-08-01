@@ -168,7 +168,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $data)
-                                    <tr data-href="/server-detail/{{ $data->id }}">
+                                    <tr data-href="/prolimslog/server-detail/{{ $data->id }}">
                                         <td>{{ $data->id }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>{{ $data->cpu_utilization }}%</td>

@@ -358,8 +358,21 @@ label {
 .dt-column-title {
     font-size: large;
 }
+
+table.dataTable td.dt-type-numeric{
+    text-align: center;
+}
+
+.table > colgroup + thead > tr:first-child > th{
+    text-align: center;
+}
+
 td {
     font-size: large;
+    text-align: center;
+}
+.hospitalname{
+    text-align: left;
 }
 .logo-name {
     float: left;
@@ -1208,7 +1221,7 @@ li.active a i, .act a i {
     white-space: nowrap;
 }
 #backupinfo_wrapper.dt-container {
-    width: 1600px;
+    width: 2000px;
     margin: 0 auto;
     border: none;
 }
@@ -1219,7 +1232,7 @@ li.active a i, .act a i {
     border: none;
 }
 #serverQuerries_wrapper.dt-container {
-    width: 680px;
+    width: 700px;
     margin: 0 auto;
     border: none;
 }
@@ -1554,6 +1567,7 @@ label {
     font-size: 0.75em;
 }
 .market-update-right {
+    margin-top: 0.3%;
     width: fit-content;
 }
 .btn-group.m-r-sm.mail-hidden-options {

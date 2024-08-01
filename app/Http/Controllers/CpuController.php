@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\CpuResource;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Carbon;
 
 class CpuController extends Controller
 {
@@ -191,66 +192,72 @@ class CpuController extends Controller
                 'backup' => $backup
             ]);
         }
+
+        
+
     
         // Return the view for non-AJAX requests
         return view('serverDetail')->with('data', $datas)->with('queries', $queries)->with('backup', $backup)->with('identifier', $id);
     }    
 
-    public function serverSide(){
+    public function graph(Request $request, $id){
 
-        $mainquery = "WITH LatestCPU AS (
-                        SELECT
-                            name,
-                            MAX(created_at) AS latest_created_at
-                        FROM
-                            cpu
-                        GROUP BY
-                            name
-                    )
 
-                    SELECT 
-                        r.id AS id,
-                        r.nama_rs AS name,
-                        r.nama_server AS server,
-                        IFNULL(MAX(b.last_db_backup_date),'0000-00-00 00:00:00') AS last_db_backup_date,
-                        c.cpu_utilization,
-                        c.cpu_sql_util,
-                        ROUND((c.memory_in_use_mb/ c.total_memory_mb)*100,2) as memory_utilization,
-                        ROUND((c.data_size/ c.disk_size)*100,2) as disk_utilization,
-                        c.total_memory_mb,
-                        c.memory_in_use_mb,
-                        c.sql_memory_mb,
-                        c.disk_size,
-                        c.data_size,
-                        c.used_data_size
-                    FROM 
-                        rsname r
-                    LEFT JOIN 
-                        backup_info b 
-                    ON 
-                        r.nama_rs = b.name
-                    LEFT JOIN 
-                        cpu c 
-                    ON 
-                        r.nama_rs = c.name
-                    AND 
-                        c.created_at = (
-                            SELECT 
-                                l.latest_created_at
-                            FROM 
-                                LatestCPU l
-                            WHERE 
-                                l.name = r.nama_rs
-                        )
-                    GROUP BY 
-                        r.nama_rs, c.cpu_utilization, c.cpu_sql_util, c.total_memory_mb, c.memory_in_use_mb, c.sql_memory_mb, c.disk_size, c.data_size, c.used_data_size;
-            ";
+        // Get the hospital name
+        $hospital_name = Hospital::where('id', $id)->first()->nama_rs;
 
-        $data = DB::select($mainquery);
-        $datad = (object) $data;
-        $datajson = json_encode($datad);
+        
+        // Define the start and end time for the day
+        $startOfDay = Carbon::today()->startOfDay();
+        $endOfDay = Carbon::today()->endOfDay();
 
-        return $datajson;
+        $hourlyData = DB::table('cpu as c')
+            ->select(
+                DB::raw('DATEPART(hour,c.created_at) as hour'),
+                DB::raw('AVG((c.memory_in_use_mb + 0.0) / c.total_memory_mb * 100) as avg_memory_utilization'),
+                DB::raw('AVG((c.data_size + 0.0) / c.disk_size * 100) as avg_disk_utilization'),
+                DB::raw('AVG(c.cpu_utilization) as avg_cpu_utilization')
+            )
+            ->where('c.name', '=', $hospital_name)
+            ->whereBetween('c.created_at', [$startOfDay, $endOfDay])
+            ->groupBy(DB::raw('DATEPART(hour,c.created_at)'))
+            ->orderBy(DB::raw('DATEPART(hour,c.created_at)'))
+            ->get();
+
+        // Add data formatting if needed
+        foreach ($hourlyData as $data) {
+            $data->avg_memory_utilization = round($data->avg_memory_utilization, 2);
+            $data->avg_disk_utilization = round($data->avg_disk_utilization, 2);
+            $data->avg_cpu_utilization = round($data->avg_cpu_utilization, 2);
+        }
+        
+        //separate them
+        $cpuavg = [];
+        $memoryavg = [];
+        $diskavg = [];
+
+        foreach ($hourlyData as $data) {
+            $cpuavg[] = $data->avg_cpu_utilization;
+            $memoryavg[] = $data->avg_memory_utilization;
+            $diskavg[] = $data->avg_disk_utilization;
+        }
+
+
+
+
+
+        // If the request is AJAX, return JSON data
+        if ($request->ajax()) {
+            return response()->json([
+                'hourlyData' => $hourlyData,
+                'cpuavg' => $cpuavg,
+                'memoryavg' => $memoryavg,
+                'diskavg' => $diskavg
+            ]);
+        }
+
+
+
 
 
     }

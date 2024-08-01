@@ -170,18 +170,17 @@
                                     @foreach ($data as $data)
                                     <tr data-href="/prolimslog/server-detail/{{ $data->id }}">
                                         <td>{{ $data->id }}</td>
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->cpu_utilization }}%</td>
-                                        <td>{{ $data->memory_utilization }}%</td>
-                                        <td>{{ $data->disk_utilization }}%</td>
+                                        <td class = "hospitalname">{{ $data->name }}</td>
+                                        <td @if ($data->cpu_utilization>80) style = "background-color : #e41717; color : #ffff" @endif>{{ $data->cpu_utilization }}%</td>
+                                        <td @if ($data->memory_utilization>80) style = "background-color : #e41717; color : #ffff" @endif>{{ $data->memory_utilization }}%</td>
+                                        <td @if ($data->disk_utilization>80) style = "background-color : #e41717; color : #ffff" @endif>{{ $data->disk_utilization }}%</td>
                                         <td>{{ $data->last_db_backup_date }}</td>
                                         <td>
                                             @if (max($data->cpu_utilization, $data->memory_utilization, $data->disk_utilization) < 60)
                                                 <span class="label label-success">normal</span>
                                             @elseif (max($data->cpu_utilization, $data->memory_utilization, $data->disk_utilization) < 80)
                                                 <span class="label label-warning">warning</span>
-                                            @else
-                                                <span class="label label-danger">danger</span>
+                                            @else <span class="label label-danger">danger</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -221,7 +220,7 @@
                                         autoWidth: false,
                                         paging: false,
                                         columnDefs: [
-                                            { type: 'status', targets: 6 }
+                                            { type: 'status', targets: 6, className: 'dt-center' }
                                         ],
                                         initComplete: function(settings, json) {
                                             $('.dt-paging-button').on("focus", function() {
@@ -283,10 +282,10 @@
                                                     }
                                                     var newRow = $(`<tr data-href="/prolimslog/server-detail/${item.id}">
                                                         <td>${no++}</td>
-                                                        <td>${item.name}</td>
-                                                        <td>${item.cpu_utilization}%</td>
-                                                        <td>${item.memory_utilization}%</td>
-                                                        <td>${item.disk_utilization}%</td>
+                                                        <td class = "hospitalname">${item.name}</td>
+                                                        <td ${item.cpu_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.cpu_utilization}%</td>
+                                                        <td ${item.memory_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.memory_utilization}%</td>
+                                                        <td ${item.disk_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.disk_utilization}%</td>
                                                         <td>${item.last_db_backup_date}</td>
                                                         <td><span class="label ${statusClass}">${statusLabel}</span></td>
                                                     </tr>`);

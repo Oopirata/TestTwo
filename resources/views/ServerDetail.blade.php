@@ -213,7 +213,7 @@
                                 { width: '1%', targets: 0 },  // Adjusted width
                                 { width: '5%', targets: 1 },  // Adjusted width
                                 { width: '3%', targets: 2 },  // Adjusted width
-                                { width: '60%', targets: 3 }   // Adjusted width
+                                { width: '65%', targets: 3 }   // Adjusted width
                             ],
                             paging: false,
                             drawCallback: function() {
@@ -294,8 +294,8 @@
                                         autoWidth: false,  // Ensure automatic width calculation is disabled
                                         columnDefs: [
                                             { width: '2%', targets: 0 },  // Adjusted width
-                                            { width: '13%', targets: 1 },  // Adjusted width
-                                            { width: '13%', targets: 2 },  // Adjusted width
+                                            { width: '11%', targets: 1 },  // Adjusted width
+                                            { width: '11%', targets: 2 },  // Adjusted width
                                             { width: '7%', targets: 3 },  // Adjusted width
                                             { width: '25%', targets: 4 },  // Adjusted width
                                             { width: '20%', targets: 5 }   // Adjusted width
@@ -338,6 +338,13 @@
                 {{-- endof backup --}}
                 <div class="clearfix"> </div>
             </div>
+            <!-- Line Chart -->
+            <div class="col-md-12">
+                <div class="work-progres" style="padding: 0.3% 0.3% 0.3% 0.3%; margin-bottom: 0.5em;">
+                    <canvas id="myLineChart" width="2025" height="1012" style="display: block; box-sizing: border-box; height: 675px; width: 1350px;"></canvas>
+                </div>
+            </div>
+            <!-- Line Chart End -->
             {{-- modal --}}
             <!--main page chit chatting end here-->
         </div>
@@ -363,5 +370,109 @@ $(".sidebar-icon").click(function() {
     }               
     toggle = !toggle;
 });
+
+// Chart.js setup
+const labels = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+const data = {
+    labels: labels,
+    datasets: [
+        {
+            label: 'CPU',
+            data: [],
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+            label: 'Memory',
+            data: [],
+            borderColor: 'rgb(54, 162, 235)',
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        },
+        {
+            label: 'Disk',
+            data: [],
+            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        }
+    ]
+};
+
+const config = {
+    type: 'line',
+    data: data,
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                ticks: {
+                    font: {
+                        size: 14,
+                        weight: 700
+                    }
+                }
+            },
+            y: {
+                min : 0,
+                max : 100,
+                ticks: {
+                    font: {
+                        size: 14,
+                        weight: 700
+                    }
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 16,
+                        weight: 700
+                    }
+                }
+            },
+            title: {
+                display: true,
+                text: 'Utilization Over Time',
+                font: {
+                    size: 20,
+                    weight: 700
+                }
+            }
+
+        }
+    }
+};
+
+
+
+var ctx = document.getElementById('myLineChart').getContext('2d');
+var myChart = new Chart(ctx, config);
+
+var getData = function() {
+    $.ajax({
+        url: `/prolimslog/getGraphData/${identifier}`,
+        method: 'GET',
+        success: function(data) {
+            // console.log(data.cpuavg);
+            // console.log(data.memoryavg);
+            // console.log(data.diskavg);
+            myChart.data.datasets[0].data = data.cpuavg;
+            myChart.data.datasets[1].data = data.memoryavg;
+            myChart.data.datasets[2].data = data.diskavg;
+            myChart.update();
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+};
+
+setInterval(getData, 3000);
+
+window.onload = function() {
+    getData();
+};
 </script>
 @endsection

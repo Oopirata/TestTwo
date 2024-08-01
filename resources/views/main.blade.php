@@ -92,7 +92,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!--icons-css-->
 <script src="https://kit.fontawesome.com/37df1c11da.js" crossorigin="anonymous"></script>
-<link href="{{ asset('style/css/font-awesome-1.css') }}" rel="stylesheet"> 
+<link href="{{ asset('style/css/font-awesome-1.css') }}" rel="stylesheet">
+
+{{-- Chart.js --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!--Google Fonts-->
 <link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>

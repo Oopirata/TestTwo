@@ -41,4 +41,5 @@ Route::get('/notif', [DashboardController::class, 'notif']);
 Route::get('/notif', [ServerDetailController::class, 'notif']);
 
 
-// Route::get('/')
+//Get Graph data
+Route::get('/getGraphData/{id}', [CpuController::class, 'graph']);

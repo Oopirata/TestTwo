@@ -159,13 +159,16 @@ class CpuController extends Controller
         $datas = json_decode($dataj, true);
     
         // Get related queries order by count and today and limit 10 and group by name query
-        $queries = Query::select('query', DB::raw('SUM(count) as count'), DB::raw('MAX(last_query) as last_query'))
+        $queries = Query::select(DB::raw('CONVERT(VARCHAR(MAX), query) AS query'), DB::raw('SUM(count) as count'), DB::raw('MAX(last_query) as last_query'))
                     ->where('name', $hospital_name)
+                    ->whereNotNull('query')
                     ->whereDate('created_at', date('Y-m-d'))
-                    ->groupBy('CAST(query as nvarchar(max))')
+                    ->groupBy(DB::raw('CONVERT(VARCHAR(MAX), query)'))
                     ->orderBy('count', 'desc')
                     ->take(10)
                     ->get();
+
+                    // dd($queries);
 
         // Add a custom ID to the queries
         foreach ($queries as $key => $value) {

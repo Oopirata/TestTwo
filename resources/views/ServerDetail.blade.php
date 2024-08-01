@@ -228,7 +228,7 @@
                 
                         function fetchAndUpdateTable() {
                             $.ajax({
-                                url: `prolimslog/indexServerDetail/${identifier}`,
+                                url: `/prolimslog/indexServerDetail/${identifier}`,
                                 method: 'GET',
                                 success: function(data) {
                                     data = data.queries;
@@ -305,7 +305,7 @@
 
                                     function fetchAndUpdateBackup() {
                                         $.ajax({
-                                            url: `prolimslog/indexServerDetail/${identifier}`,
+                                            url: `/prolimslog/indexServerDetail/${identifier}`,
                                             method: 'GET',
                                             success: function(data) {
                                                 data = data.backup;

@@ -288,6 +288,8 @@ class CpuApiController extends Controller
             'disk' => ROUND(($data->used_data_size/ $data->disk_size)*100,2)
         ];
 
+        // event(new ServerAlert($pesan));
+
         if(max($pesan['cpu'], $pesan['memory'], $pesan['disk']) > 80){
             event(new ServerAlert($pesan));
         }

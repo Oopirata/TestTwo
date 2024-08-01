@@ -29,7 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   var channel = pusher.subscribe('notification-channel');
   channel.bind('server-alert', function(data) {
     // alert(JSON.stringify(data.message));
-    var audio = new Audio("{{ asset('style/sounds/alert3.mp3') }}");
+    var audio = new Audio("{{ asset('style/sounds/alertfix.mp3') }}");
     console.log(audio);
     // audio.muted = true;
     audio.play();

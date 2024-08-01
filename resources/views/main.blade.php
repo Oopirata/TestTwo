@@ -18,8 +18,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script>
   
-  // Enable pusher logging - don't include this in production
-  Pusher.logToConsole = true;
+  // // Enable pusher logging - don't include this in production
+  // Pusher.logToConsole = true;
   
   var pusher = new Pusher('a980d70c9ad0c7168f38', {
     cluster: 'ap1'

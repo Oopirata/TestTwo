@@ -49,7 +49,7 @@ class CpuController extends Controller
                         r.id AS id,
                         r.nama_rs AS name,
                         r.nama_server AS server,
-                        ISNULL(CONVERT(varchar, b.last_db_backup_date, 113), 'not available') AS last_db_backup_date,
+                        ISNULL(CONVERT(varchar, b.last_db_backup_date, 121), 'not available') AS last_db_backup_date,
                         c.cpu_utilization,
                         c.cpu_sql_util,
                         ROUND(((c.memory_in_use_mb + 0.0) / (c.total_memory_mb + 0.0) * 100), 2) AS memory_utilization,

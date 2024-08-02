@@ -28,7 +28,6 @@
             <div class="header-left">
                 <div class="logo-name">
                     <a href="/prolimslog/dashboard"> <h1>ELIMSPRO</h1> 
-                    <!--<img id="logo" src="" alt="Logo"/>--> 
                     </a>                                
                 </div>
                 <!--search-box-->
@@ -108,7 +107,7 @@
         <!--header end here-->
         <!--inner block start here-->
         <div class="inner-block">
-            <!--market updates updates-->
+            <!--Status Rumah Sakit-->
             <div class="market-updates">
                 <div class="col-md-4 market-update-gd">
                     <div class="market-update-block clr-block-1">
@@ -148,8 +147,8 @@
                 </div>
                 <div class="clearfix"> </div>
             </div>
-            <!--market updates end here-->
-            <!--mainpage chit-chatting-->
+            <!--Status Rumah Sakit end here-->
+            <!--mainpage dashboard-->
             <div class="chit-chat-layer1">
                 <div class="col-md-12 chit-chat-layer-full">
                     <div class="work-progres">
@@ -180,7 +179,8 @@
                                                 <span class="label label-success">normal</span>
                                             @elseif (max($data->cpu_utilization, $data->memory_utilization, $data->disk_utilization) < 80)
                                                 <span class="label label-warning">warning</span>
-                                            @else <span class="label label-danger">danger</span>
+                                            @elseif (max($data->cpu_utilization, $data->memory_utilization, $data->disk_utilization) >= 80)
+                                                <span class="label label-danger">danger</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -217,6 +217,7 @@
                                     }
                 
                                     var tabelHospital = $('#servercpu').DataTable({
+                                        order: [[6, 'desc']],
                                         autoWidth: false,
                                         paging: false,
                                         columnDefs: [
@@ -286,7 +287,7 @@
                                                         <td ${item.cpu_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.cpu_utilization}%</td>
                                                         <td ${item.memory_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.memory_utilization}%</td>
                                                         <td ${item.disk_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.disk_utilization}%</td>
-                                                        <td>${item.last_db_backup_date}</td>
+                                                        <td ${isToday(item.last_db_backup_date)?'':'style = "background-color : #e41717; color : #ffff"'}>${item.last_db_backup_date}</td>
                                                         <td><span class="label ${statusClass}">${statusLabel}</span></td>
                                                     </tr>`);
                                                     tabelHospital.row.add(newRow).draw(false);
@@ -305,6 +306,28 @@
                                         $('#normal-count').text(normal);
                                         $('#warning-count').text(warning);
                                         $('#danger-count').text(danger);
+                                    }
+
+                                    function isToday(datetime) {
+
+                                        if (datetime == 'not available') {
+                                            return false;
+                                        }
+
+                                        const monthMap = {
+                                            Jan: 0, Feb: 1, Mar: 2, Apr: 3,
+                                            May: 4, Jun: 5, Jul: 6, Aug: 7,
+                                            Sep: 8, Oct: 9, Nov: 10, Dec: 11
+                                        };
+
+                                        const [day, month, year, time] = datetime.split(' ');
+
+                                        const backupDate = new Date(year, monthMap[month], day);
+
+                                        const today = new Date();
+                                        today.setHours(0, 0, 0, 0); // Reset time to midnight
+
+                                        return backupDate.getTime() === today.getTime();
                                     }
                 
                                     setInterval(fetchAndUpdateTable, 5000);
@@ -354,7 +377,7 @@
                 </div>                                
                 <div class="clearfix"> </div>
             </div>
-            <!--main page chit chatting end here-->
+            <!--main page dashboard end here-->
         </div>
         <!--inner block end here-->
     </div>

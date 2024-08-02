@@ -46,7 +46,7 @@
         <!--header end here-->
         <!--inner block start here-->
         <div class="inner-block">
-            <!--market updates updates-->
+            <!--Utility updates-->
             <div class="market-updates">
                 <div class="col-md-4 market-update-gd">
                     @if ($data['cpu_utilization'] < 60)
@@ -131,8 +131,8 @@
                 </div>
                 <div class="clearfix"> </div>
             </div>
-            <!--market updates end here-->
-            <!--mainpage chit-chatting-->
+            <!--Utility updates end here-->
+            <!--Server Detail-->
             <div class="chit-chat-layer1">
                 {{-- tabel Query --}}
                 <div class="col-md-6 chit-chat-layer-left">
@@ -346,7 +346,7 @@
             </div>
             <!-- Line Chart End -->
             {{-- modal --}}
-            <!--main page chit chatting end here-->
+            <!--Server Detail end here-->
         </div>
         <!--inner block end here-->
     </div>
@@ -391,8 +391,8 @@ const data = {
         {
             label: 'Disk',
             data: [],
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: 'rgb(128, 40, 128)',
+            backgroundColor: 'rgba(128, 40, 128, 0.5)',
         }
     ]
 };
@@ -455,9 +455,6 @@ var getData = function() {
         url: `/prolimslog/getGraphData/${identifier}`,
         method: 'GET',
         success: function(data) {
-            // console.log(data.cpuavg);
-            // console.log(data.memoryavg);
-            // console.log(data.diskavg);
             myChart.data.datasets[0].data = data.cpuavg;
             myChart.data.datasets[1].data = data.memoryavg;
             myChart.data.datasets[2].data = data.diskavg;
@@ -474,5 +471,6 @@ setInterval(getData, 3000);
 window.onload = function() {
     getData();
 };
+// chart end
 </script>
 @endsection

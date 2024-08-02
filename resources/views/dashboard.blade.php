@@ -170,9 +170,9 @@
                                     <tr data-href="/prolimslog/server-detail/{{ $data->id }}">
                                         <td>{{ $data->id }}</td>
                                         <td class = "hospitalname">{{ $data->name }}</td>
-                                        <td @if ($data->cpu_utilization>80) style = "background-color : #e41717; color : #ffff" @endif>{{ $data->cpu_utilization }}%</td>
-                                        <td @if ($data->memory_utilization>80) style = "background-color : #e41717; color : #ffff" @endif>{{ $data->memory_utilization }}%</td>
-                                        <td @if ($data->disk_utilization>80) style = "background-color : #e41717; color : #ffff" @endif>{{ $data->disk_utilization }}%</td>
+                                        <td @if ($data->cpu_utilization>80) style = "font-weight : 900; color: #E41717" @endif>{{ $data->cpu_utilization }}%</td>
+                                        <td @if ($data->memory_utilization>80) style = "font-weight : 900; color: #E41717" @endif>{{ $data->memory_utilization }}%</td>
+                                        <td @if ($data->disk_utilization>80) style = "font-weight : 900; color: #E41717" @endif>{{ $data->disk_utilization }}%</td>
                                         <td>{{ $data->last_db_backup_date }}</td>
                                         <td>
                                             @if (max($data->cpu_utilization, $data->memory_utilization, $data->disk_utilization) < 60)
@@ -270,7 +270,7 @@
                                                     var maxUtilization = Math.max(item.cpu_utilization, item.memory_utilization, item.disk_utilization);
                                                     item.memory_utilization = parseFloat(item.memory_utilization).toFixed(2);
                                                     item.disk_utilization = parseFloat(item.disk_utilization).toFixed(2);
-                                                    if (maxUtilization >= 80) {
+                                                    if (maxUtilization >= 80 || !isToday(item.last_db_backup_date)) {
                                                         statusLabel = 'danger';
                                                         statusClass = 'label-danger';
                                                         dangerCount++;
@@ -284,10 +284,10 @@
                                                     var newRow = $(`<tr data-href="/prolimslog/server-detail/${item.id}">
                                                         <td>${no++}</td>
                                                         <td class = "hospitalname">${item.name}</td>
-                                                        <td ${item.cpu_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.cpu_utilization}%</td>
-                                                        <td ${item.memory_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.memory_utilization}%</td>
-                                                        <td ${item.disk_utilization>80?'style = "background-color : #e41717; color : #ffff"':''}>${item.disk_utilization}%</td>
-                                                        <td ${isToday(item.last_db_backup_date)?'':'style = "background-color : #e41717; color : #ffff"'}>${item.last_db_backup_date}</td>
+                                                        <td ${item.cpu_utilization>80?'style = "font-weight : 900; color: #E41717"':''}>${item.cpu_utilization}%</td>
+                                                        <td ${item.memory_utilization>80?'style = "font-weight : 900; color: #E41717"':''}>${item.memory_utilization}%</td>
+                                                        <td ${item.disk_utilization>80?'style = "font-weight : 900; color: #E41717"':''}>${item.disk_utilization}%</td>
+                                                        <td ${isToday(item.last_db_backup_date)?'':'style = "font-weight : 900; color: #E41717"'}>${item.last_db_backup_date}</td>
                                                         <td><span class="label ${statusClass}">${statusLabel}</span></td>
                                                     </tr>`);
                                                     tabelHospital.row.add(newRow).draw(false);

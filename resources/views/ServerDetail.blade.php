@@ -180,10 +180,10 @@
                     var identifier = "{{ $identifier }}";
                 
                     // Function to open the popup dialog with the full query text
-                    function openPop(query) {
+                    function openPop(encodedQuery) {
                         const popDialog = document.getElementById("popupDialog");
                         const popupQuery = document.getElementById("popupQuery");
-                        popupQuery.textContent = query;
+                        popupQuery.textContent = decodeURIComponent(encodedQuery); // Decode the query
                         popDialog.style.visibility = "visible";
                     }
                 
@@ -197,7 +197,8 @@
                         // Function to slice long query texts in the DataTable
                         function sliceText() {
                             $('.truncate').each(function() {
-                                var fullText = $(this).data('full-text');
+                                var fullTextEncoded = $(this).data('full-text');
+                                var fullText = decodeURIComponent(fullTextEncoded); // Decode the query
                                 var maxLength = 25; // Adjust the length as needed
                                 if (fullText.length > maxLength) {
                                     var slicedText = fullText.slice(0, maxLength) + '...';
@@ -235,12 +236,13 @@
                                     table.clear();
                                     data.forEach(function(item, index) {
                                         var queryText = item.query.length > 25 ? item.query.slice(0, 25) + '...' : item.query;
+                                        var encodedQuery = encodeURIComponent(item.query); // Encode the query
                                         var newRow = $(`
                                             <tr>
                                                 <td>${index + 1}</td>
                                                 <td>
-                                                    <button type="button" class="reset-button" data-toggle="modal" data-target="#id-${index + 1}" onclick="openPop('${item.query.replace(/'/g, "\\'")}')">
-                                                        <span class="truncate" title="${item.query}" data-full-text="${item.query}">${queryText}</span>
+                                                    <button type="button" class="reset-button" data-toggle="modal" data-target="#id-${index + 1}" onclick="openPop('${encodedQuery}')">
+                                                        <span class="truncate" title="${encodedQuery}" data-full-text="${encodedQuery}">${queryText}</span>
                                                     </button>
                                                 </td>
                                                 <td>${item.count}</td>

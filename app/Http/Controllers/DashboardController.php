@@ -33,6 +33,8 @@ class DashboardController extends Controller
                             ROW_NUMBER() OVER (PARTITION BY name ORDER BY created_at DESC) AS rn
                         FROM
                             backup_info
+                        WHERE
+                            database_name = 'sim_rs'
                     )
 
                     SELECT 

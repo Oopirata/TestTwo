@@ -258,6 +258,7 @@
                                             url: '/prolimslog/index',
                                             method: 'GET',
                                             success: function(data) {
+                                                console.log('Data fetched:', data);
                                                 tabelHospital.clear();
                                                 var normalCount = 0;
                                                 var warningCount = 0;

@@ -43,6 +43,8 @@ class CpuController extends Controller
                             ROW_NUMBER() OVER (PARTITION BY name ORDER BY created_at DESC) AS rn
                         FROM
                             backup_info
+                        WHERE 
+                            database_name = 'sim_rs'
                     )
 
                     SELECT 
@@ -177,7 +179,29 @@ class CpuController extends Controller
         }
     
         // Get backup information order by latest last_db_backup_date and limit 10
-        $backup = BackupInfo::where('name', $data->name)->orderBy('last_db_backup_date', 'desc')->take(10)->get();
+        // $backup = BackupInfo::where('name', $data->name)->groupBy('backupset_name')->take(10)->get();
+        // $backup = BackupInfo::select(DB::raw('*, ROW_NUMBER() OVER (PARTITION BY backupset_name ORDER BY backupset_name) as row_num'))
+        //         ->where('name', $data->name)
+        //         ->having('row_num', '=', 1)
+        //         ->limit(10)
+        //         ->get();
+
+        $backup = BackupInfo::where('name', $data->name)
+                ->groupBy('backupset_name')
+                ->select(
+                    'backupset_name',
+                    DB::raw('MAX(name) as name'),
+                    DB::raw('MAX(server) as server'),
+                    DB::raw('MAX(database_name) as database_name'),
+                    DB::raw('MAX(last_db_backup_date) as last_db_backup_date'),
+                    DB::raw('MAX(backup_start_date) as backup_start_date'),
+                    DB::raw('MAX(backup_size) as backup_size'),
+                    DB::raw('MAX(physical_device_name) as physical_device_name'),
+                    DB::raw('MAX(id) as max_id')
+                )
+                ->orderBy('last_db_backup_date', 'desc')
+                ->take(10)
+                ->get();
     
         // Add a custom ID to the backups
         foreach ($backup as $key => $value) {

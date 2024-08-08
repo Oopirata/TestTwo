@@ -71,11 +71,25 @@ class CpuApiController extends Controller
                     ON 
                         r.nama_rs = c.name AND c.rn = 1";
 
+        
+
 
         $data = DB::select($mainquery);
+
+        $countbackup = DB::table('backup_info')->count();
+        $countcpu = DB::table('cpu')->count();
+        $counthospital = DB::table('queries')->count();
+
+        $countall = [
+            'backup' => $countbackup,
+            'cpu' => $countcpu,
+            'hospital' => $counthospital
+        ];
+        
         return response()->json([
             'status' => 'success',
-            'data' => $data
+            'data' => $data,
+            'count' => $countall
         ]);
     }
 
